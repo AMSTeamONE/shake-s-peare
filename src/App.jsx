@@ -1,8 +1,24 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
+import axios from 'axios';
 
 function App() {
+  const [produtos, setProdutos] = useState([]);
+
+  function carregaProdutos() {
+    axios.get("https://app-api-tapwm.onrender.com/api/produtos")
+      .then(res => {
+        setProdutos(res.data);
+      });
+  };
+
+  useEffect(() => {
+    carregaProdutos();
+    console.log(produtos);
+  }, [])
+
   const products = [
     {
       name: "Café preto",
