@@ -7,7 +7,7 @@ export default () => {
       <img src={shake} className="w-16 rounded-xl" alt="logo" />
 
       <h1 className="text-xl font-semibold">Shake S Peare</h1>
-g
+
       <ul className="list-none flex gap-3">
         <li>Home</li>
         <li>Produtos</li>

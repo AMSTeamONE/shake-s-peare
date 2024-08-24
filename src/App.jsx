@@ -1,23 +1,23 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
-import axios from 'axios';
 
 function App() {
   const [produtos, setProdutos] = useState([]);
+  const [firstN, setFirstN] = useState(5);
 
   function carregaProdutos() {
-    axios.get("https://app-api-tapwm.onrender.com/api/produtos")
-      .then(res => {
-        setProdutos(res.data);
-      });
-  };
+    axios.get("https://fishnet-api-py.onrender.com/itens").then((res) => {
+      setProdutos(res.data);
+      console.log(produtos);
+    });
+  }
 
   useEffect(() => {
     carregaProdutos();
-    console.log(produtos);
-  }, [])
+  }, []);
 
   const products = [
     {
@@ -44,7 +44,7 @@ function App() {
   ];
 
   return (
-    <div className="block bg-indigo-200 min-h-[100vh]">
+    <div className="block bg-indigo-50 min-h-[100vh]">
       <Navbar />
 
       <main className="p-4">
@@ -52,11 +52,35 @@ function App() {
           Para a sua pausa depois do almoço
         </h2>
 
-        <section className="flex gap-8">
+        <section className="flex gap-8 mb-10">
           {products.map((prod, i) => (
             <ProductCard prod={prod} key={i} />
           ))}
         </section>
+
+        <p>
+          Por algum motivo o <code>console.log</code> não funciona, mas os dados
+          são carregados.
+        </p>
+
+        <h2 className="text-lg font-semibold">
+          Primeiros{" "}
+          <input
+            type="number"
+            value={firstN}
+            onChange={(e) => setFirstN(e.target.value)}
+            className="w-10 px-2 rounded-lg shadow-sm border border-stone-300"
+            style={{ "-moz-appearance": "textfield" }}
+          />{" "}
+          produtos da API FishNet usada no nosso TCC:
+        </h2>
+        <ul className="list-disc ml-5">
+          {produtos.slice(0, firstN).map((prod, i) => (
+            <li key={i}>
+              {prod.name}, {prod.price}
+            </li>
+          ))}
+        </ul>
       </main>
     </div>
   );
