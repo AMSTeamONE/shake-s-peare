@@ -74,7 +74,7 @@ function App() {
 
         <section className="flex gap-8 mb-10">
           {coffeeShop.map((prod, i) => (
-            <ProductCard prod={prod} key={i} />
+            <ProductCard prod={prod} carregaProdutos={carregaProdutos} key={i} />
           ))}
         </section>
 

@@ -1,6 +1,14 @@
+import axios from "axios";
 import { price } from "../lib/format";
 
-export default ({ prod }) => {
+export default ({ prod, carregaProdutos }) => {
+  function remover (id){
+    let api = "https://fishnet-api-py.onrender.com/itens";
+    axios.delete(`${api}/${id}`)
+      .then(()=>{
+
+      })
+  }
   return (
     <div className="border border-slate-400 shadow rounded-lg">
       <img src={prod.picture} alt={prod.name} className="w-40 rounded-t-lg" />
