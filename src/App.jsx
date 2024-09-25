@@ -7,15 +7,15 @@ import ProductCard from "./components/ProductCard";
 function App() {
   const API_URL = "https://shake-s-peare.onrender.com/books";
   const [produtos, setProdutos] = useState([]);
-  const [coffeeShop, setCoffeeShop] = useState([]);
-  const [firstN, setFirstN] = useState(5);
 
   function carregaProdutos() {
-    axios.get(API_URL).then((res) => {
-      setProdutos(res.data);
-      setCoffeeShop(() => res.data);
-      console.log(res.data);
-    });
+    axios
+      .get(API_URL)
+      .then((res) => {
+        setProdutos(res.data);
+        console.log(res.data);
+      })
+      .catch((e) => console.log(e));
   }
 
   function registrarProduto(e) {
@@ -25,15 +25,24 @@ function App() {
     const produto = {
       title: data.get("title"),
       author: data.get("author"),
+      pages: data.get("pages"),
       description: data.get("description"),
+      dateOfPublishment: data.get("dateOfPublishment"),
+      editor: data.get("editor"),
       rating: data.get("rating"),
-      picture: data.get("picture") ?? "sem-imagem",
+      cover: data.get("cover"),
     };
 
-    axios.post(API_URL, produto).then((res) => {
-      console.log(res.data);
-      carregaProdutos();
-    });
+    axios
+      .post(API_URL, produto)
+      .then((res) => {
+        console.log(res.data);
+        carregaProdutos();
+      })
+      .catch((e) => {
+        e.stack = null;
+        console.log(e.response);
+      });
   }
 
   useEffect(() => {
@@ -67,24 +76,58 @@ function App() {
         >
           <input
             type="text"
-            name="name"
+            name="title"
             maxLength={50}
-            placeholder="Nome do produto"
+            placeholder="Título do livro"
+            className="w-60 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
+          />
+          <input
+            type="text"
+            name="author"
+            maxLength={50}
+            placeholder="Autor"
+            className="w-60 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
+          />
+          <input
+            type="text"
+            name="description"
+            maxLength={100}
+            placeholder="Descrição"
+            className="w-60 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
+          />
+          <input
+            type="date"
+            name="dateOfPublishment"
+            className="w-60 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
+          />
+          <input
+            type="text"
+            name="editor"
+            maxLength={50}
+            placeholder="Editora"
             className="w-60 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
           />
           <input
             type="number"
-            name="price"
-            min={0}
-            step={0.01}
-            placeholder="Preço"
+            name="pages"
+            min={1}
+            step={1}
+            placeholder="Páginas"
+            className="w-32 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
+          />
+          <input
+            type="number"
+            name="rating"
+            min={1}
+            max={5}
+            step={1}
+            placeholder="Rating"
             className="w-32 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
           />
           <input
             type="url"
-            name="picture"
-            id="picture"
-            placeholder="URL da imagem do produto"
+            name="cover"
+            placeholder="URL da capa"
             className="w-60 px-2 py-1 rounded-lg shadow-sm border border-stone-300"
           />
           <button
