@@ -33,6 +33,8 @@ function App() {
       cover: data.get("cover"),
     };
 
+    console.log(produto);
+
     axios
       .post(API_URL, produto)
       .then((res) => {

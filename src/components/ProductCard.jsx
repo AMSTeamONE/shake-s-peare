@@ -1,13 +1,12 @@
 import axios from "axios";
-import { price } from "../lib/format";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({ prod, carregaProdutos }) => {
   function remover(id) {
-    let api = "https://fishnet-api-py.onrender.com/itens";
+    let api = "https://shake-s-peare.onrender.com/books";
     axios.delete(`${api}/${id}`).then(() => {
       carregaProdutos();
-    });
+    }).catch(e => console.error(e.response.data));
   }
 
   return (
@@ -16,14 +15,14 @@ export default ({ prod, carregaProdutos }) => {
 
       <div className="p-3">
         
-        <img src={prod.cover} alt={`Capa do livro: ${prod.title}`} />
+        <img src={prod.cover} alt={`Capa do livro: ${prod.title}`} className="h-64 m-auto mb-2" />
         <p className="truncate font-bold">{prod.title}</p>
         <p className="truncate">{prod.author}</p>
         <button
-          onClick={remover}
+          onClick={() => remover(prod._id)}
           className="rounded-lg bg-indigo-400 border border-indigo-700 shadow-sm w-full py-1 mt-2"
         >
-          Exlcuir
+          Excluir
         </button>
       </div>
     </div>
