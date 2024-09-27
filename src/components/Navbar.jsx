@@ -9,9 +9,9 @@ export default () => {
       <h1 className="text-xl font-semibold">Shake S Peare</h1>
 
       <ul className="list-none flex gap-3">
-        <li>Home</li>
-        <li>Produtos</li>
-        <li>Contato</li>
+        <li><a href="/Home">Home</a></li>
+        <li><a href="/Create">+Produtos</a></li>
+        <li><a href="/Contato">Contato</a></li>
       </ul>
     </nav>
   );

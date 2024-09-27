@@ -1,5 +1,14 @@
 # Projeto de Técnicas Avançadas de Programação
 
+
+## Observação:
+Começar colocando `/Home` após o `npm start`
+<br>
+Exemplo:
+<br>
+![alt text](image.png)
+
+
 ## Equipe de desenvolvimento
 | Ágata Cecília | Jorge Terence | Sarah Melo |
 | ------------- | ------------- | ---------- |
